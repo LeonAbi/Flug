@@ -39,9 +39,21 @@ void Kunde::passwortAendern(string s){
     m_pw = s;
 }
 
-bool Kunde::anmelden(string benutzername, string pw){
-    if(benutzername == m_benutzername && pw == m_pw){
+bool Kunde::anmelden(string pw){
+    if(pw == m_pw){
+        cout << "Login erfolgreich" << endl;
         return true;
     }
-    else return false;
+    else{
+        cout << "Falsches Passwort!" << endl;
+        return false;
+    }
+}
+
+string Kunde::getBenutzer(){
+    return m_benutzername;
+}
+
+string Kunde::getPW(){
+    return m_pw;
 }

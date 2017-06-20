@@ -12,6 +12,7 @@
  */
 #include <string>
 #include <ctime>
+#include <iostream>
 #ifndef FLUG_H
 #define FLUG_H
 
@@ -24,6 +25,7 @@ public:
     string getFlugnr();
     string getStart();
     string getZiel();
+    void print();
 
 private:
     string m_start;

@@ -12,6 +12,7 @@
  */
 
 #include <string>
+#include <iostream>
 #ifndef KUNDE_H
 #define KUNDE_H
 
@@ -30,7 +31,9 @@ public:
     void passwortAendern(string s);
     void emailAendern(string s);
     void anschriftAendern(Anschrift a);
-    bool anmelden(string benutzername, string pw);
+    bool anmelden(string pw);
+    string getBenutzer();
+    string getPW();
     
 private:
     string m_name;

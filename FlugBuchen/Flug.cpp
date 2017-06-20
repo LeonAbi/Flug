@@ -37,3 +37,10 @@ string Flug::getZiel(){
     return m_ziel;
 }
 
+void Flug::print()
+{
+    cout<< "Flugnummer:" << m_flugnr << endl;
+    cout<< "Start: "<< m_start<< ", Datum: "<< m_datumS << endl;
+    cout<< "Ziel: "<< m_ziel<< ", Datum: "<< m_datumZ << endl;
+}
+

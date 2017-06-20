@@ -14,6 +14,7 @@
 #ifndef TICKET_H
 #define TICKET_H
 #include <string>
+////#include <iostream>
 #include "Buchung.h"
 
 using namespace std;
@@ -28,11 +29,13 @@ class Ticket
 public:
     Ticket();
     bool bezahlen(Buchung buchung);
+    void print();
     
 private:
     Reiseklasse m_reiseklasse;
     string m_ticketnr;
     Buchung m_buchung;
+
 };
 
 #endif /* TICKET_H */

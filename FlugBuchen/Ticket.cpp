@@ -21,3 +21,10 @@ bool Ticket::bezahlen(Buchung buchung){
     return true;
 }
 
+void Ticket::print(){
+//    cout <<
+//            m_ticketnr << endl
+//            m_reiseklasse << endl
+////            
+}
+
