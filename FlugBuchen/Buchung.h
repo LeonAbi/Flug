@@ -26,6 +26,7 @@ public:
     string getBuchungsnr();
     bool getStatus();
     void setStatus(bool b);
+    vector<Flug> getGebuchte();
 private:
     bool m_status;
     double m_preis;

@@ -39,6 +39,7 @@ public:
     void ausloggen();
     void ticketAnzeigen();
     void print(vector<Flug> v);
+    vector<Flug> getBuchung();
 private:
     int m_auswahl;
     vector<Kunde> m_kundenListe;

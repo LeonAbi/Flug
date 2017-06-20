@@ -17,7 +17,7 @@ Kunde::Kunde()
 {
 }
 
-Kunde::Kunde(string name, int geburtsdatum, Anschrift anschrift, string telefon, string email, string benutzer, string password){
+Kunde::Kunde(string name, string geburtsdatum, Anschrift anschrift, string telefon, string email, string benutzer, string password){
     m_name = name;
     m_email = email;
     m_geburtsdatum = geburtsdatum;

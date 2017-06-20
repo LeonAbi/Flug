@@ -44,3 +44,7 @@ bool Buchung::getStatus(){
 void Buchung::setStatus(bool b){
     m_status = b;
 }
+
+vector<Flug> Buchung::getGebuchte(){
+    return m_fluege;
+}

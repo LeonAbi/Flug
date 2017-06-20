@@ -23,7 +23,7 @@ using namespace std;
 class Ticket
 {
 public:
-    Ticket();
+    Ticket(Buchung* buchung);
     void bezahlen();
     void print();
     

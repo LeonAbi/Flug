@@ -27,7 +27,7 @@ class Kunde
 {
 public:
     Kunde();
-    Kunde(string name, int geburtsdatum, Anschrift anschrift, string telefon, string email, string benutzer, string password);
+    Kunde(string name, string geburtsdatum, Anschrift anschrift, string telefon, string email, string benutzer, string password);
     void passwortAendern(string s);
     void emailAendern(string s);
     void anschriftAendern(Anschrift a);
@@ -38,7 +38,7 @@ public:
     
 private:
     string m_name;
-    int m_geburtsdatum;
+    string m_geburtsdatum;
     string m_telefon;
     string m_email;
     string m_benutzername;

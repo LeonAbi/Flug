@@ -13,8 +13,9 @@
 
 #include "Ticket.h"
 
-Ticket::Ticket()
+Ticket::Ticket(Buchung* buchung)
 {
+    m_buchung = buchung;
 }
 
 void Ticket::bezahlen(){

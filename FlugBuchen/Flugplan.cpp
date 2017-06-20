@@ -15,10 +15,16 @@
 
 Flugplan::Flugplan()
 {
-    for(int i=0;i<5;i++){
-        Flug f("Hannover", "Berlin", "123", i, i+10, i*10, economy);
-        fluegeEinlesen(f);
-    }
+        Flug a("Hannover", "Berlin", "1111", 10101, 20101, 265, economy);
+    fluegeEinlesen(a);
+        Flug b("München", "Berlin", "2222", 10101, 20101, 265, economy);
+    fluegeEinlesen(b);
+        Flug c("Stuttgart", "Berlin", "3333", 10101, 20101, 265, economy);
+    fluegeEinlesen(c);
+        Flug d("Zürich", "Berlin", "4444", 10101, 20101, 265, economy);
+    fluegeEinlesen(d);
+        Flug e("Paris", "Berlin", "5555", 10101, 20101, 265, economy);
+    fluegeEinlesen(e);
 }
 
 void Flugplan::fluegeEinlesen(Flug flug){
@@ -31,6 +37,7 @@ vector<Flug> Flugplan::flugSuchen(string start, string ziel){
     for(int i=0;i<m_flugListe.size();i++){
         if(m_flugListe.at(i).getStart() == start && m_flugListe.at(i).getZiel() == ziel){
             m_suchListe.push_back(m_flugListe.at(i));
+            cout << "Flug wurde gefunden!! Siehe Suchliste" << endl;
         }
     }
     

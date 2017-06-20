@@ -20,12 +20,14 @@ CUI::CUI()
     a.strasse = "abc";
     a.wohnort = "bcbcbc";
     
-    Kunde k("Bob", 31030000, a, "181818181", "@@@", "Master", "password");
+    Kunde k("A", "31011978", a, "0815", "@@@", "master", "pw");
     m_kundenListe.push_back(k);
     
     m_loggedin = false;
     m_flugPlan = new Flugplan();
-    m_ticket = new Ticket();
+    
+    m_buchung = new Buchung();
+    m_ticket = new Ticket(m_buchung);
     
 }
 
@@ -33,6 +35,7 @@ CUI::~CUI(){
     delete m_aktBenutzer;
     delete m_flugPlan;
     delete m_ticket;
+    delete m_buchung;
 }
 
 void CUI::zeigeMenue(){
@@ -67,11 +70,12 @@ void CUI::zeigeMenue(){
     
     cout << endl << "    MENÜ   " << endl << endl;
     cout << "1. Flug suchen" << endl;
-    cout << "5. Alle Flüge anzeigen" << endl;
-    cout << "6. Suchliste anzeigen" << endl;
-    cout << "2. Ticket anzeigen" << endl;
-    cout << "3. Ticket bezahlen" << endl;
-    cout << "0. ausloggen" << endl; 
+    cout << "2. Alle Flüge anzeigen" << endl;
+    cout << "3. Suchliste anzeigen" << endl;
+    cout << "4. Flüge buchen" << endl;
+    cout << "5. Gebuchte Flüge anzeigen" << endl;
+    cout << "6. Ticket bezahlen" << endl;
+    cout << "0. ausloggen" << endl << endl; 
     int i;
     cin >> i;
     
@@ -79,21 +83,22 @@ void CUI::zeigeMenue(){
     switch(i){
     case 1:     cout << "Ihre Auswahl: Flug suchen" << endl;
     flugSuchen();
-    //b=true;
     break;
-    case 2:     cout << "Ihre Auswahl: Ticket anzeigen" << endl;
-    ticketAnzeigen();
-    b=true;
     break;
-    case 3:     cout << "Ihre Auswahl: Ticket bezahlen" << endl;
+    case 6:     cout << "Ihre Auswahl: Ticket bezahlen" << endl;
     bezahlen();
-    b=true;
     break;
-    case 5:     cout << "Ihre Auswahl: Alle Flüge anzeigen" << endl;
+    case 2:     cout << "Ihre Auswahl: Alle Flüge anzeigen" << endl;
     flugListeAnzeigen();
     break;
-    case 6:     cout << "Ihre Auswahl: Suchliste anzeigen" << endl;
+    case 3:     cout << "Ihre Auswahl: Suchliste anzeigen" << endl;
     print(m_gesuchtefluege);
+    break;
+    case 4:     cout << "Ihre Auswahl: Flüge buchen" << endl;
+    buchen();
+    break;
+    case 5:     cout << "Ihre Auswahl: Gebuchte Flüge anzeigen" << endl;
+    print(getBuchung());
     break;
     case 0:     cout << "Ihre Auswahl: Ausloggen" << endl;
     ausloggen();
@@ -113,7 +118,7 @@ void CUI::anmelden(){
     string benutzername, pw;
     cout  << "Benutzername eingeben: ";
     cin >> benutzername;
-    cout << endl << "Passwort eingeben: ";
+    cout << "Passwort eingeben: ";
     cin >> pw;
     
     for(int i=0;i<m_kundenListe.size();i++){
@@ -128,8 +133,8 @@ void CUI::anmelden(){
 }
 
 bool CUI::registrieren(){
-    string benutzername, pw, name, telefonnr, email, strasse, plz, wohnort;
-    int geburtsdatum;
+    string benutzername, pw, name, telefonnr, email, strasse, plz, wohnort, geburtsdatum;
+
     cout << "Benutzername eingeben: ";
     cin >> benutzername;
     cout << "Passwort eingeben: ";
@@ -159,7 +164,7 @@ bool CUI::registrieren(){
     Kunde k(name, geburtsdatum, a, telefonnr, email, benutzername, pw);
     
     for(int i=0;i<m_kundenListe.size();i++){
-        if(m_kundenListe.at(i).getBenutzer() == name){
+        if(m_kundenListe.at(i).getBenutzer() == benutzername){
             cout << "Benutzer bereits registriert!!" << endl;
             return false;
         }
@@ -179,16 +184,6 @@ void CUI::ticketAnzeigen(){
 
 void CUI::flugListeAnzeigen()
 {
-//    vector<Flug> fluege = flugSuchen();
-//
-//    for (int i; i < fluege.size(); i++)
-//    {
-//        cout << i+1 << ". ";
-//        fluege.at(i).print();
-//        cout << endl;
-//    }
-//
-//    return fluege;
     vector<Flug> fluege = m_flugPlan->getFlugplan();
     for(int i=0;i<fluege.size();i++){
         fluege.at(i).print();
@@ -199,9 +194,9 @@ vector<Flug> CUI::flugSuchen()
 {
     string start;
     string ziel;
-    cout << "Start: " << endl;
+    cout << "Start: ";
     cin >> start;
-    cout << "Ziel: " << endl;
+    cout << "Ziel: ";
     cin >> ziel;
 
     m_gesuchtefluege = m_flugPlan->flugSuchen(start, ziel);
@@ -209,14 +204,22 @@ vector<Flug> CUI::flugSuchen()
 }
 
 void CUI::buchen(){
-//    vector <Flug> v = flugListeAnzeigen();
-//    cout << "Welchen Flug möchten Sie buchen?" << endl;
-//    cin >> m_auswahl;
-//    
-//    if(m_auswahl <= v.size()){
-//    m_buchung->buchen(v.at(m_auswahl-1));
-//    }
-//    else cout << "Flug nicht gefunden!" << endl;
+
+    string xy;
+    vector<Flug> v = m_flugPlan->getFlugplan();
+    cout << "Welchen Flug möchten Sie buchen? (Flugnr eingeben!):";
+    cin >> xy;
+    
+    for(int i=0;i<v.size();i++){
+        if(v.at(i).getFlugnr() == xy){
+            m_buchung->buchen(v.at(i));
+            cout << "Flug erfolgreich gebucht!!" << endl;
+            return;
+        }
+    }
+    
+    cout << "Fehler! Flug nicht gefunden!" << endl;
+
 }
 
 void CUI::ausloggen(){
@@ -226,14 +229,33 @@ void CUI::ausloggen(){
 }
 
 void CUI::bezahlen(){
-    m_ticket->bezahlen();
+if (!m_buchung->getStatus())
+    {
+        string s;
+        cout << "Der Geamtpreis beträgt: " << m_buchung->getPreis() << "€" << endl;
+        cout << "Möchten sie jetzt bezahlen? (Y/N)" << endl;
+        cin >> s;
+        if (s == "Y" || s == "y")
+        {
+            m_ticket->bezahlen();
+        }
+        else cout << "Nicht bezahlt !" << endl;
 
+    }
+    else cout<< "Bereits bezahlt"<< endl;
 }
+
+
+
 
 void CUI::print(vector<Flug> v){
     for(int i=0;i<v.size();i++){
         v.at(i).print();
     }
+}
+
+vector<Flug> CUI::getBuchung(){
+    return m_buchung->getGebuchte();
 }
 
 
