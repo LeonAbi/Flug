@@ -19,22 +19,20 @@
 
 using namespace std;
 
-enum Reiseklasse{
-    business,
-    economy,
-    first
-};
+
 class Ticket
 {
 public:
     Ticket();
-    bool bezahlen(Buchung buchung);
+    void bezahlen();
     void print();
     
 private:
     Reiseklasse m_reiseklasse;
     string m_ticketnr;
-    Buchung m_buchung;
+    Buchung* m_buchung;
+    Kunde* m_kunde;
+    bool m_istBezahlt;
 
 };
 

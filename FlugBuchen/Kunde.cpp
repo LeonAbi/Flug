@@ -57,3 +57,7 @@ string Kunde::getBenutzer(){
 string Kunde::getPW(){
     return m_pw;
 }
+
+string Kunde::getName(){
+    return m_name;
+}

@@ -17,22 +17,31 @@
 #define FLUG_H
 
 using namespace std;
+
+enum Reiseklasse{
+    business,
+    economy,
+    first
+};
+
 class Flug
 {
 public:
     Flug();
-    Flug(string start, string ziel, string flugnr, time_t datumS, time_t datumZ);
+    Flug(string start, string ziel, string flugnr, int datumS, int datumZ, double preis, Reiseklasse klasse);
     string getFlugnr();
     string getStart();
     string getZiel();
     void print();
+    double getPreis();
 
 private:
     string m_start;
     string m_ziel;
     string m_flugnr;
-    time_t m_datumS;
-    time_t m_datumZ;
+    int m_datumS;
+    int m_datumZ;
+    double m_preis;
 };
 
 #endif /* FLUG_H */

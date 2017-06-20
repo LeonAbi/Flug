@@ -26,6 +26,7 @@ public:
     Flugplan();
     void fluegeEinlesen(Flug flug);
     vector<Flug> flugSuchen(string start, string ziel);
+    vector<Flug> getFlugplan();
 private:
     string m_flughafen;
     time_t m_gueltigab;

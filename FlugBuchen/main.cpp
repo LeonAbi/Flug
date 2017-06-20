@@ -12,6 +12,7 @@
  */
 
 #include <cstdlib>
+#include "CUI.h"
 
 using namespace std;
 
@@ -20,7 +21,8 @@ using namespace std;
  */
 int main(int argc, char** argv)
 {
-
+    CUI c;
+    c.zeigeMenue();
     return 0;
 }
 

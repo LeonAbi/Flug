@@ -15,14 +15,15 @@
 
 Flugplan::Flugplan()
 {
+    for(int i=0;i<5;i++){
+        Flug f("Hannover", "Berlin", "123", i, i+10, i*10, economy);
+        fluegeEinlesen(f);
+    }
 }
 
 void Flugplan::fluegeEinlesen(Flug flug){
-    for(int i=0;i<m_flugListe.size();i++){
-        if(m_flugListe.at(i).getFlugnr() != flug.getFlugnr()){
-                m_flugListe.push_back(flug);
-        }
-    }
+    m_flugListe.push_back(flug);
+
 
 }
 
@@ -33,6 +34,13 @@ vector<Flug> Flugplan::flugSuchen(string start, string ziel){
         }
     }
     
+    if(m_suchListe.empty()){
+        cout << "Keine Flüge gefunden" << endl;
+    }
+    
     return m_suchListe;
 }
 
+vector<Flug> Flugplan::getFlugplan(){
+    return m_flugListe;
+}

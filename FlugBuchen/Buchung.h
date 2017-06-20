@@ -21,12 +21,15 @@ class Buchung
 {
 public:
     Buchung();
-    bool istBezahlt();
-    bool buchen(Flug flug);
+    void buchen(Flug flug);
+    double getPreis();
+    string getBuchungsnr();
+    bool getStatus();
+    void setStatus(bool b);
 private:
     bool m_status;
     double m_preis;
-    Kunde m_kunde;
+    Kunde* m_kunde;
     string m_buchungsnr;
     vector<Flug> m_fluege;
     

@@ -15,12 +15,32 @@
 
 Buchung::Buchung()
 {
+    m_buchungsnr = "DE0000111100LE";
+    
+    m_status = false;
 }
 
-bool Buchung::istBezahlt(){
-    return true;
+
+void Buchung::buchen(Flug flug){
+    m_fluege.push_back(flug);
 }
 
-bool Buchung::buchen(Flug flug){
-    return true;
+double Buchung::getPreis(){
+    for(int i=0;i<m_fluege.size();i++){
+        m_preis += m_fluege.at(i).getPreis();
+    }
+    
+    return m_preis;
+}
+
+string Buchung::getBuchungsnr(){
+    return m_buchungsnr;
+}
+
+bool Buchung::getStatus(){
+    return m_status;
+}
+
+void Buchung::setStatus(bool b){
+    m_status = b;
 }

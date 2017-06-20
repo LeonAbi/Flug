@@ -34,6 +34,7 @@ public:
     bool anmelden(string pw);
     string getBenutzer();
     string getPW();
+    string getName();
     
 private:
     string m_name;

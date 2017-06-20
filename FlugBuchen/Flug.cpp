@@ -17,12 +17,13 @@ Flug::Flug()
 {
 }
 
-Flug::Flug(string start, string ziel, string flugnr, time_t datumS, time_t datumZ){
+Flug::Flug(string start, string ziel, string flugnr, int datumS, int datumZ, double preis, Reiseklasse klasse){
     m_start = start;
     m_ziel = ziel;
     m_flugnr = flugnr;
     m_datumS = datumS;
     m_datumZ = datumZ;
+    m_preis = preis;
 }
 
 string Flug::getFlugnr(){
@@ -39,8 +40,13 @@ string Flug::getZiel(){
 
 void Flug::print()
 {
+
     cout<< "Flugnummer:" << m_flugnr << endl;
     cout<< "Start: "<< m_start<< ", Datum: "<< m_datumS << endl;
     cout<< "Ziel: "<< m_ziel<< ", Datum: "<< m_datumZ << endl;
+}
+
+double Flug::getPreis(){
+    return m_preis;
 }
 

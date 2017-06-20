@@ -17,14 +17,17 @@ Ticket::Ticket()
 {
 }
 
-bool Ticket::bezahlen(Buchung buchung){
-    return true;
+void Ticket::bezahlen(){
+    m_buchung->setStatus(true);
+    m_istBezahlt = true;
+    cout << "Ticket bezahlt!" << endl;
 }
 
 void Ticket::print(){
-//    cout <<
-//            m_ticketnr << endl
-//            m_reiseklasse << endl
-////            
+    cout << "Buchungsnr: " << m_buchung->getBuchungsnr() << endl;
+    cout << "Ticketnr: " << m_ticketnr << endl;
+    cout << m_kunde->getName() << endl;
+    cout << m_reiseklasse << endl;
+    cout << m_buchung->getPreis() << endl;       
 }
 
